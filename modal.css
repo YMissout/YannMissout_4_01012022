@@ -68,13 +68,13 @@ img {
   /*text-decoration: underline;*/
 }
 
-.topnav a.active:after {
+/* .topnav a.active:after {
   content: "";
   height: 1px;
   background: #ffffff;
   display: block;
   margin-top: 2px;
-}
+} */
 
 .topnav .icon {
   display: none;
