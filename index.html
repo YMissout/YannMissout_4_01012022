@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <title>Reservation</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="modal.css" />
+    <link rel="stylesheet" href="css/modal.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -12,138 +13,110 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans"
       rel="stylesheet"
     />
-    <title>Reservation</title>
   </head>
   <body>
-    <header>
-      <div class="topnav" id="myTopnav">
-        <div class="header-logo">
-          <img alt="logo" src="Logo.png" />
-        </div>
-        <div class="main-navbar">
-          <!--<a href="#" class="active"><span>Accueil</span></a>-->
-          <a href="#" class="active"><span>Détails de l'évènement</span></a>
-          <a href="#"><span>À propos</span></a>
-          <a href="#"><span>Contact</span></a>
-          <a href="#"><span>Évènements passés</span></a>
-          <a href="javascript:void(0);" class="icon" onclick="editNav()">
-            <i class="fa fa-bars"></i>
-          </a>
-        </div>
+    <header class="topnav" id="myTopnav">
+      <div class="header-logo">
+        <img alt="logo" src="css/images/Logo.png" width="auto" height="auto" />
       </div>
+      <nav class="main-navbar">
+        <a href="#" class="active"><span>Accueil</span></a>
+        <a href="#"><span>Détails de l'évènement</span></a>
+        <a href="#"><span>À propos</span></a>
+        <a href="#"><span>Contact</span></a>
+        <a href="#"><span>Évènements passés</span></a>
+        <a href="javascript:void(0);" class="icon" onclick="editNav()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </nav>
     </header>
+
     <main>
-      <div class="hero-section">
+      <section class="hero-section">
         <div class="hero-content">
-          <h1 class="hero-headline">
-            Marathon national<br />
-            de jeux vidéos
-          </h1>
+          <h1 class="hero-headline">Marathon National<br />de Jeux Vidéos</h1>
           <p class="hero-text">
-            <!--  Vous aimez jouer?Notre prochain évènement gaming est ouvert
-                aux réservations,mais les Places sont limitées !-->
-            Vivez-vous pour jouer? Notre prochain événement de jeu accepte
-            maintenant les réservations pour les joueurs, mais les places sont
-            limitées.
+            Vous aimez jouer ? Notre prochain évènement gaming est ouvert aux
+            réservations... Places limitées !
           </p>
           <button class="btn-signup modal-btn">je m'inscris</button>
         </div>
         <div class="hero-img">
-          <img src="./bg_img.jpg" alt="img" />
+          <img src="css/images/bg_img.jpg" alt="img" />
         </div>
         <button class="btn-signup modal-btn">je m'inscris</button>
-      </div>
+      </section>
 
-      <div class="modal">
+      <!--modal-->
+      <div class="bground">
         <div class="content">
-          <span class="close"></span>
+          <span id="close"></span>
           <div class="modal-body">
-            <form
-              name="reserve"
-              action="index.html"
-              method="get"
-              id="myForm"
-              onsubmit="return validate();"
-            >
-              <fieldset class="formData">
-                <label for="firstName">Prénom</label><br />
+            <form name="reserve" id="modal-form" method="post">
+              <div class="formData">
+                <label for="first">Prénom</label><br />
                 <input
                   class="text-control"
                   type="text"
-                  id="firstName"
-                  name="firstName"
-                  required
-                  pattern="^[A-zÀ-ž]{2,255}$"
-                />
-                <span class="error"></span><br />
-              </fieldset>
-
-              <fieldset class="formData">
-                <label for="lastName">Nom</label><br />
+                  id="first"
+                  name="first"
+                  minlength="2"
+                /><br />
+              </div>
+              <div id="firstname-error"></div>
+              <!--message d'erreur à afficher en JS si le champ n'est pas correct-->
+              <div class="formData">
+                <label for="last">Nom</label><br />
                 <input
                   class="text-control"
                   type="text"
-                  id="lastName"
-                  name="lastName"
-                  required
-                  pattern="^[A-zÀ-ž]{2,255}$"
-                />
-                <span class="error"></span>
-                <br />
-              </fieldset>
-
-              <fieldset class="formData">
+                  id="last"
+                  name="last"
+                /><br />
+              </div>
+              <div id="lastname-error"></div>
+              <!--message d'erreur à afficher en JS si le champ n'est pas correct-->
+              <div class="formData">
                 <label for="email">E-mail</label><br />
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
-                  required
-                  pattern="^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$"
-                />
-                <!--pattern : This matches 99.99% of email addresses, including some of the newer top-level-domain extensions, such as info, museum, name, etc. It also allows for emails tied directly to IP addresses.-->
-                <span class="error"></span>
-                <br />
-              </fieldset>
-
-              <fieldset class="formData">
-                <label for="birthDate">Date de naissance</label>
-                <br />
+                /><br />
+              </div>
+              <div id="email-error"></div>
+              <!--message d'erreur à afficher en JS si le champ n'est pas correct-->
+              <div class="formData">
+                <label for="birthdate">Date de naissance</label><br />
                 <input
                   class="text-control"
                   type="date"
-                  id="birthDate"
-                  name="birthDate"
-                  required
-                />
-                <!--pattern="^(0?[1-9]|1[0-2])/([0-2]?[1-9]|[1-3][01])/\d{4}$"-->
-
-                <span class="error"></span>
-                <br />
-              </fieldset>
-
-              <fieldset class="formData">
+                  id="birthdate"
+                  name="birthdate"
+                  min="1900-01-01"
+                  value="2000-01-01"
+                /><br />
+              </div>
+              <div id="age-error"></div>
+              <!--message d'erreur à afficher en JS si le champ n'est pas correct-->
+              <div class="formData">
                 <label for="quantity"
                   >À combien de tournois GameOn avez-vous déjà participé
                   ?</label
-                >
-                <br />
+                ><br />
                 <input
                   type="number"
                   class="text-control"
                   id="quantity"
                   name="quantity"
-                  value="0"
                   min="0"
-                  max="99"
-                  required
                 />
-                <span class="error"></span>
-              </fieldset>
-
-              <p class="text-label">Quelles villes ?</p>
-              <fieldset class="formData">
+              </div>
+              <div id="participations-error"></div>
+              <!--message d'erreur à afficher en JS si le champ n'est pas correct-->
+              <p class="text-label">Quelle ville ?</p>
+              <div class="formData">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -152,9 +125,8 @@
                   value="New York"
                 />
                 <label class="checkbox-label" for="location1">
-                  <span class="checkbox-icon"></span> New York
+                  <span class="checkbox-icon"></span>New York
                 </label>
-
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -163,9 +135,8 @@
                   value="San Francisco"
                 />
                 <label class="checkbox-label" for="location2">
-                  <span class="checkbox-icon"></span> San Francisco
+                  <span class="checkbox-icon"></span>San Francisco
                 </label>
-
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -174,9 +145,8 @@
                   value="Seattle"
                 />
                 <label class="checkbox-label" for="location3">
-                  <span class="checkbox-icon"></span> Seattle
+                  <span class="checkbox-icon"></span>Seattle
                 </label>
-
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -185,9 +155,8 @@
                   value="Chicago"
                 />
                 <label class="checkbox-label" for="location4">
-                  <span class="checkbox-icon"></span> Chicago
+                  <span class="checkbox-icon"></span>Chicago
                 </label>
-
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -196,9 +165,8 @@
                   value="Boston"
                 />
                 <label class="checkbox-label" for="location5">
-                  <span class="checkbox-icon"></span> Boston
+                  <span class="checkbox-icon"></span>Boston
                 </label>
-
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -207,51 +175,60 @@
                   value="Portland"
                 />
                 <label class="checkbox-label" for="location6">
-                  <span class="checkbox-icon"></span> Portland
+                  <span class="checkbox-icon"></span>Portland
                 </label>
-
-                <span class="error"></span>
-              </fieldset>
-
-              <fieldset class="formData">
+              </div>
+              <div id="city-error"></div>
+              <!--message d'erreur à afficher en JS si le champ n'est pas correct-->
+              <div class="formData">
                 <input
                   class="checkbox-input"
                   type="checkbox"
-                  id="termsOfUse"
+                  id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="termsOfUse">
-                  <span class="checkbox-icon"></span> J'ai lu et accepté les
-                  conditions d'utilisation.
+                <label class="checkbox2-label" for="checkbox1">
+                  <span class="checkbox-icon"></span>
+                  J'ai lu et accepté les conditions d'utilisation.
                 </label>
+                <div id="cgu-error"></div>
+                <!--message d'erreur à afficher en JS si le champ n'est pas correct-->
                 <br />
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
-                  <span class="checkbox-icon"></span> Je souhaite être prévenu
-                  des prochains évènements.
+                  <span class="checkbox-icon"></span>
+                  Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br />
-              </fieldset>
+              </div>
 
               <input
+                id="submitdata"
                 class="btn-submit button"
                 type="submit"
                 value="C'est parti"
+                onclick="validateform(event)"
               />
             </form>
-
-            <div id="loader"></div>
-            <div id="confirmation" class="animate-bottom">
-              <h2>Merci!</h2>
-              <p>Votre réservation a été reçue.</p>
-            </div>
           </div>
         </div>
       </div>
+
+      <div id="message-modal">
+        <!--<div id="message-modal__content">-->
+        <span id="message-modal__close-message"></span>
+        <div id="message-modal__body">
+          Merci, vos données ont bien été enregistrées.
+        </div>
+        <button type="button" id="close-button">Fermer</button>
+        <!--</div>-->
+      </div>
     </main>
+
     <footer>
       <p class="copyrights">Copyright 2014 - 2022, GameOn Inc.</p>
     </footer>
-    <script src="modal.js"></script>
+
+    <script src="js/modal.js"></script>
   </body>
 </html>
