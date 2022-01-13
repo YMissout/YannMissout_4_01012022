@@ -35,10 +35,10 @@ img {
   margin: 3.5%;
 }
 .header-logo {
-    float: left;
+  float: left;
 }
 .main-navbar {
-    float: right;
+  float: right;
 }
 .topnav a {
   float: left;
@@ -69,37 +69,40 @@ img {
 }
 
 @media screen and (max-width: 1130px) {
-  .topnav a {display: none;}
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
   }
 }
+.topnav.responsive a {
+  float: none;
+  display: block;
+  text-align: left;
+}
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
   }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
 }
 
-
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
+@media screen and (max-width: 540px) {
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
-} 
+}
 
 main {
   font-size: 130%;
@@ -111,8 +114,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -226,11 +227,11 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
- 
+
 input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
+  content: attr(data-error);
+  font-size: 0.4em;
+  color: red;
 }
 .checkbox-label,
 .checkbox2-label {
@@ -485,7 +486,7 @@ footer {
     font-size: 4.5rem;
     white-space: normal;
   }
-} 
+}
 
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -525,13 +526,15 @@ footer {
     text-align: center;
   }
 }
-  
+
 @media screen and (max-width: 460px) {
-  body{position: relative;}
-  .hero-text{
+  body {
+    position: relative;
+  }
+  .hero-text {
     margin-right: 100px;
   }
-}  
+}
 
 @keyframes modalopen {
   from {
@@ -550,28 +553,28 @@ footer {
 #age-error,
 #participations-error,
 #city-error,
-#cgu-error{
+#cgu-error {
   color: #ffb5bd;
-  font-size: .7rem;
-  padding: .5rem 0;
+  font-size: 0.7rem;
+  padding: 0.5rem 0;
   display: none;
 }
 
 /*success message modal when validation is done*/
-#message-modal{
-position: absolute;
-display: none;
-z-index: 1;
-width: 536px;
-height: 850.61px;
-top: 87px;
-left: 31.9%;
-border-radius: 8px;
-background: #232323;
-box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
+#message-modal {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  width: 536px;
+  height: 850.61px;
+  top: 87px;
+  left: 31.9%;
+  border-radius: 8px;
+  background: #232323;
+  box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
 }
 
-#message-modal__close-message{
+#message-modal__close-message {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -598,7 +601,7 @@ box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
   transform: rotate(-45deg);
 }
 
-#message-modal__body{
+#message-modal__body {
   position: absolute;
   z-index: 3;
   left: 106px;
@@ -616,7 +619,7 @@ box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
   text-align: center;
 }
 
-#close-button{
+#close-button {
   position: absolute;
   top: 793.29px;
   left: 168.31px;
@@ -638,19 +641,19 @@ box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
 }
 
 @media screen and (max-width: 1439px) {
-  #message-modal{
+  #message-modal {
     height: 657px;
     top: 87px;
     left: 25%;
     width: 536px;
   }
-  #message-modal__body{
+  #message-modal__body {
     left: 12.6%;
     right: 12.8%;
     top: 292px;
     width: 74.6%;
   }
-  #message-modal__close-message{
+  #message-modal__close-message {
     right: 20px;
     top: 20px;
     width: 19px;
@@ -672,7 +675,7 @@ box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
   #message-modal__close-message:after {
     transform: rotate(-45deg);
   }
-  #close-button{
+  #close-button {
     padding: 12px;
     top: 593px;
     left: 31.4%;
@@ -683,32 +686,32 @@ box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.25);
 }
 
 @media screen and (max-width: 1130px) {
-  #message-modal{
+  #message-modal {
     top: 79px;
   }
 }
 
 @media screen and (max-width: 800px) {
-  #message-modal{
+  #message-modal {
     height: 657px;
     top: 79px;
     left: 10%;
     width: 536px;
   }
-  #close-button{
+  #close-button {
     width: 34.1%;
   }
 }
 
 @media screen and (max-width: 644px) {
-  #message-modal{
+  #message-modal {
     height: 657px;
     top: 79px;
     left: 0;
     width: 100%;
     border-radius: 8px 8px 0px 0px;
   }
-  #close-button{
+  #close-button {
     width: 34.1%;
   }
 }
