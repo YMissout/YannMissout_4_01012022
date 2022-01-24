@@ -8,216 +8,335 @@ function editNav() {
 }
 
 // DOM Elements
-const modalBg = document.querySelector(".bground");
-const modalSuccessMessage = document.querySelector("#message-modal")
+// bouton je m'inscris
 const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
-const ModalForm = document.querySelector("#modal-form");
-const closeModal = document.querySelector("#close"); /*Cette constante permet de cibler l'élément du DOM ayant l'id "close" (la croix qui ferme la modale)*/
-const closeSuccessMessage = document.querySelector('#message-modal__close-message'); /*Cette constante permet de cibler la croix qui ferme la modale du message de validation*/
-const closeSuccessBtn = document.querySelector('#close-button'); //Cette constante permet de cibler le bouton "fermer" de la modale de validation.
-
-let firstName = document.querySelector("#first");
-console.log(firstName.value);
-let lastName = document.querySelector("#last");
-let email = document.querySelector("#email");
-let age = document.querySelector("#birthdate");
-let participations = document.querySelector("#quantity");
-let city = document.querySelector('input[name="location"]');
-let acceptCGU = document.querySelector("#checkbox1");
-/*Ces variables correspondent à chacune des entrées du formulaire,
-je vais les appeler dans une fonction qui va permettre de vérifier la valeur qui a été entrée par l'utilisateur pour chacune de ces variables,
-et définir si cela doit valider le champ ou renvoyer un message d'erreur.*/
-
-let firstNameError = document.querySelector("#firstname-error");
-let lastNameError = document.querySelector("#lastname-error");
-let emailError = document.querySelector("#email-error");
-let ageError = document.querySelector("#age-error");
-let participationsError = document.querySelector("#participations-error");
-let cityError = document.querySelector("#city-error");
-let acceptCGUError = document.querySelector("#cgu-error")
-/*Ces variables correspondent aux messages d'erreurs qui seront modifiés en fonction de la valeur entrée ou non par l'utilisateur
-dans chaque champ du formulaire*/
-
-// launch modal event
+//lauch modal
+// launch modal (bouton je m'inscris) évenement du formulaire au click
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// launch modal form
+// apparition de la launchModal formulaire d'inscription
 function launchModal() {
-  modalBg.style.display = "block";
+  modalbg.style.display = "block";
 }
+// bouton fermeture croix x
+const btnClose = document.querySelector("#closebtn");
+const modalbg = document.querySelector(".bground");
+btnClose.addEventListener("click", function (event) {
+  modalbg.style.display = "none";
+});
 
-// launch closing-modal event
-closeModal.addEventListener('click', e => { //quand on clique sur la croix
-  modalBg.style.display = "none"; //la modale passe en display: none
-})
+//
+// 1er CHAMP : LE PRENOM
+//
+const validateFirst = (event) => {
+  // event.preventDefault();
+  const nameInput = document.getElementById("first"); // name field
+  const valueNameInput = nameInput.value; //value field
+  const nameRegex = /^[A-ZÇÉÈÊËÀÂÎÏÔÙÛa-zçéèêëàâîïôùû_\-\.\ ]+$/;
+  let errorText = document.getElementById("texterrorfirstname");
 
-//fonction qui vérifie le champ du prénom :
-function checkFirstName(){
-	if(!firstName.value){ //si le champ est vide
-		firstNameError.innerHTML = "Veuillez renseigner un prénom"; //la div du message d'erreur est modifiée (ajout du texte)
-		firstNameError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else if(firstName.value.length < 2){ //si le champ comporte moins de 2 caractères
-		firstNameError.innerHTML = "Le prénom doit comporter 2 caractères minimum"; //la div du message d'erreur est modifiée (ajout du texte)
-		firstNameError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else{ //sinon (si le champ est rempli et s'il comporte au moins 2 caractères)
-		firstNameError.style.display = "none"; //ne pas montrer le message d'erreur
-		return true; //le champ est valide
-	}
-}
-
-//fonction qui vérifie le champ du nom :
-function checkLastName(){
-	if(!lastName.value){ //si le champ est vide
-		lastNameError.innerHTML = "Veuillez renseigner un nom de famille"; //la div du message d'erreur est modifiée (ajout du texte)
-		lastNameError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else if(lastName.value.length < 2){ //si le champ comporte moins de 2 caractères
-		lastNameError.innerHTML = "Le nom doit comporter 2 caractères minimum"; //la div du message d'erreur est modifiée (ajout du texte)
-		lastNameError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else{ //sinon (si le champ est rempli et s'il comporte au moins 2 caractères)
-		lastNameError.style.display = "none"; //ne pas montrer le message d'erreur
-		return true; //le champ est valide
-	}
-}
-
-//variable qui permet de définir un format de mail valide avec l'utilisation de Regex:
-let emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-//la première partie du mail peut contenir des lettres majuscules ou minuscules, des chiffres, ainsi que tous les caractères listés avant le "]+@"
-//après le @, on peut trouver des chiffres ou des lettres mais pas de caractères spéciaux
-//il faut qu'il y ait un point "." et que celui-ci ne soit pas le premier ni le dernier caractère + qu'il n'y ait pas 2 points qui se suivent
-//après le point, on trouve encore une chaine de caractères composés de lettres ou chiffres (nom de domaine en .com, .fr,...)
-
-//fonction qui vérifie le champ de l'email :
-function checkEmail(){
-	if(!email.value){ //si le champ est vide
-		emailError.innerHTML = "Veuillez renseigner une adresse email"; //la div du message d'erreur est modifiée (ajout du texte)
-		emailError.style.display = "block"; //la div passe de display:none à display: block
-		return false; //les données ne seront pas envoyées
-	} else if(emailRegExp.exec(email.value) == null){ //si ce qu'a rentré l'utilisateur ne correspond pas à une valeur attendue par la regex définie ci-dessus
-		emailError.innerHTML = "L'adresse mail n'est pas valide"; //la div du message d'erreur est modifiée (ajout du texte)
-		emailError.style.display = "block"; //la div passe de display:none à display: block
-		return false; //les données ne seront pas envoyées
-	} else{ //sinon (si le champ est rempli et si le mail rentré est au bon format)
-		emailError.style.display = "none"; //ne pas montrer le message d'erreur
-		return true; //le champ est valide
-	}
-}
-
-//fonction qui vérifie le champ de la date de naissance :
-function checkAge(){
-	//Je récupère la date de l'utilisateur :
-	let date1 = age.value
-	//Je crée un objet date à partir de cette value :
-	let dateOfUser = new Date(date1);
-	//Je récupère la date actuelle en appelant simplement le constructeur avec sa valeur par défaut :
-	let currentDate = new Date();
-	if(!age.value){ //si le champ est vide
-		ageError.innerHTML = "Veuillez renseigner une date de naissance"; //la div du message d'erreur est modifiée (ajout du texte)
-		ageError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else if(dateOfUser >= currentDate){ //si la date entrée par l'utilisateur est supérieure (= dans le futur) ou égale (= même date) à la date du jour
-		ageError.innerHTML = "La date de naissance n'est pas valide"; //la div du message d'erreur est modifiée (ajout du texte)
-		ageError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else{ //sinon (si le champ est rempli et que la date est antérieure à la date du jour)
-		ageError.style.display = "none"; //ne pas montrer le message d'erreur
-		return true; //le champ est valide
-	}	
-}
-
-//fonction qui vérifie le champ du nombre de participations :
-function checkParticipations(){
-	if(!participations.value){ //si le champ est vide
-		participationsError.innerHTML = "Veuillez renseigner un nombre de participations (0 si vous n'avez jamais participé)"; //la div du message d'erreur est modifiée (ajout du texte)
-		participationsError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else if(participations.value > 99){ //si le nombre de participations est supérieur à 99
-		participationsError.innerHTML = "Le nombre de participations est trop élevé"; //la div du message d'erreur est modifiée (ajout du texte)
-		participationsError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else{ //sinon (si le champ est rempli et que le nombre de participations est inférieur ou égal à 99)
-		participationsError.style.display = "none"; //ne pas montrer le message d'erreur
-		return true; //le champ est valide
-	}	
-}
-
-//Je crée un array qui stocke les boutons radios
-let locationArray = [
-	document.getElementById('location1'),
-	document.getElementById('location2'),
-	document.getElementById('location3'),
-	document.getElementById('location4'),
-	document.getElementById('location5'),
-	document.getElementById('location6')];
-
-//fonction qui vérifie si un bouton radio est coché
-function checkCity(){
-	//si TOUS les boutons radios sont unchecked
-	if((!locationArray[0].checked) //je récupère pour l'élément du tableau ayant l'index 0 (location1) la propriété checked.
-	&& (!locationArray[1].checked) //idem élément 2...
-	&& (!locationArray[2].checked) //...
-	&& (!locationArray[3].checked)
-	&& (!locationArray[4].checked)
-	&& (!locationArray[5].checked)){
-		cityError.innerHTML = "Veuillez renseigner une ville pour participer"; //la div du message d'erreur est modifiée (ajout du texte)
-		cityError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else{ //sinon (si un bouton radio est coché)
-		cityError.style.display = "none"; //ne pas montrer le message d'erreur
-		return true; //le champ est valide
-	}
-}
-
-//fonction qui vérifie si la checkbox d'acceptation des CGU est cochée
-function checkCGU(){
-	if(!acceptCGU.checked){ //si la checkbox est décochée
-		acceptCGUError.innerHTML = "Veuillez accepter les conditions générales d'utilisation"; //la div du message d'erreur est modifiée (ajout du texte)
-		acceptCGUError.style.display = "block"; //la div passe de display: none à display: block
-		return false; //les données ne seront pas envoyées
-	} else{ //sinon (si la checkbox est cochée)
-		acceptCGUError.style.display = "none"; //ne pas montrer le message d'erreur
-		return true; //le champ est valide
-	}
-}
-
-//fonction qui ouvre la modale de message de validation :
-function launchModalSuccess() {
-	modalSuccessMessage.style.display = "block";
+  if (valueNameInput.length < 2) {
+    errorText.innerHTML =
+      "Merci d'entrer au minimum 2 caractères pour le champ du prénom";
+    changeStyleFirstName = document.getElementById("texterrorfirstname");
+    changeStyleFirstName.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return false;
+  } else if (
+    nameRegex.test(nameInput.value) === true && ///erreur si valueNameInput!!!!!!!
+    valueNameInput.length >= 2
+  ) {
+    errorText.innerHTML = "";
+    changeStyleFirstName = document.getElementById("texterrorfirstname");
+    changeStyleFirstName.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return true;
+  } else {
+    changeStyleFirstName = document.getElementById("texterrorfirstname");
+    changeStyleFirstName.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    errorText.innerHTML = "Les caractères spéciaux ne sont pas accepté";
+    return false;
   }
+};
+//
+//2ème CHAMP : NOM DE FAMILLE
+//
+const validateLast = (event) => {
+  //  event.preventDefault();
+  const lastNameInput = document.getElementById("last");
+  const valueLastNameInput = lastNameInput.value;
+  const lastNameRegex = /^[A-ZÇÉÈÊËÀÂÎÏÔÙÛa-zçéèêëàâîïôùû_\-\.\ ]+$/;
+  let errorText = document.getElementById("texterrorlastname");
 
-//fonction qui permet de valider le formulaire et envoyer les données entrées par l'utilisateur :
-function validateform(e){
-	e.preventDefault(); //stopper le comportement par défaut de onsubmit du formulaire
-	let checkFirstNameResult = checkFirstName(); //j'appelle la fonction de vérification du champ prénom et je la stocke dans une variable
-	let checkLastNameResult = checkLastName(); //j'appelle la fonction de vérification du champ nom et je la stocke dans une variable
-	let checkEmailResult = checkEmail(); //j'appelle la fonction de vérification du champ email et je la stocke dans une variable
-	let checkAgeResult = checkAge(); //j'appelle la fonction de vérification du champ âge et je la stocke dans une variable
-	let checkParticipationsResult = checkParticipations(); //j'appelle la fonction de vérification du champ participations et je la stocke dans une variable
-	let checkCityResult = checkCity(); //j'appelle la fonction de vérification des boutons radios de villes et je la stocke dans une variable
-	let checkCGUResult = checkCGU(); //j'appelle la fonction de vérification de la checkbox des CGU et je la stocke dans une variable
-	
-	if(checkFirstNameResult //si la variable retourne 'true' (correspond au "return: true" dans le "else" de la fonction checkFirstName)
-		&& checkLastNameResult //idem
-		&& checkEmailResult //idem
-		&& checkAgeResult //...
-		&& checkParticipationsResult
-		&& checkCityResult
-		&& checkCGUResult){ //si toutes les fonctions retournent "true" (tous les champs sont valides)
-		modalBg.style.display = "none"; //la modale passe en display: none
-		launchModalSuccess(); //la modale de message de validation s'affiche
-		return true; //valider le formulaire
-	}
-}
+  if (valueLastNameInput.length < 2) {
+    errorText.innerHTML =
+      "Merci d'entrer au minimum 2 caractères pour le champ du nom";
+    changeStyleLastName = document.getElementById("texterrorlastname");
+    changeStyleLastName.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return false;
+  } else if (
+    lastNameRegex.test(lastNameInput.value) == true && ///erreur si valueNameInput!!!!!!!
+    valueLastNameInput.length >= 2
+  ) {
+    errorText.innerHTML = "";
+    changeStyleLastName = document.getElementById("texterrorlastname");
+    changeStyleLastName.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return true;
+  } else {
+    changeStyleFirstName = document.getElementById("texterrorfirstname");
+    changeStyleFirstName.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    errorText.innerHTML = "Les caractères spéciaux ne sont pas accepté";
+    return false;
+  }
+};
 
-// closing the success modal
-closeSuccessMessage.addEventListener('click', e => { //quand on clique sur la croix
-	modalSuccessMessage.style.display = "none"; //la modale passe en display: none
-  })
+//
+//3ème CHAMP : EMAIL
+//
+const validateEmail = (event) => {
+  // event.preventDefault();
+  const nameInputEmail = document.getElementById("email");
+  const valueNameInputEmail = nameInputEmail.value;
+  const emailFormat = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
+  // /^\A(?:[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])\z$/;
 
-closeSuccessBtn.addEventListener('click', e => { //quand on clique sur le bouton "fermer"
-	modalSuccessMessage.style.display = "none"; //la modale passe en display: none
-})
+  if (valueNameInputEmail == "") {
+    textEmail = document.getElementById("texterroremail").textContent;
+    document.getElementById("texterroremail").textContent =
+      "Merci de renseigner une adresse email valide";
+    changeStyleEmail = document.getElementById("texterroremail");
+    changeStyleEmail.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return false;
+  } else if (!emailFormat.test(valueNameInputEmail)) {
+    document.getElementById("texterroremail").textContent =
+      "Adresse email incorrect. ";
+    changeStyleEmail = document.getElementById("texterroremail");
+    changeStyleEmail.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return false;
+  } else {
+    document.getElementById("texterroremail").textContent = "";
+    return true;
+  }
+};
+//
+// 4ème CHAMP : BIRTHDATE
+//
+const validateBirthdate = (event) => {
+  const nameInputBirthdate = document.getElementById("birthdate");
+  const valueNameInputBirthdate = nameInputBirthdate.value;
+  let errorText = document.getElementById("texterrorbirthdate");
+
+  if (valueNameInputBirthdate === "") {
+    document.getElementById("texterrorbirthdate").textContent =
+      "Merci d'entrez une date de naissance valide";
+    changeStyleBirthdate = document.getElementById("texterrorbirthdate");
+    changeStyleBirthdate.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return false;
+  } else {
+    document.getElementById("texterrorbirthdate").textContent = "";
+    return true;
+  }
+};
+//
+//5ème CHAMP : QUANTITY
+//
+const validateQuantity = (event) => {
+  const quantityInput = document.getElementById("quantity");
+  const valueQuantityInput = quantityInput.value;
+  const quantityRegex = /^[0-9]/;
+  let errorText = document.getElementById("texterrorquantity");
+
+  if (
+    quantityRegex.test(quantityInput.value) === true &&
+    valueQuantityInput >= 1
+  ) {
+    errorText.innerHTML = "";
+    changeStyleQuantity = document.getElementById("texterrorquantity");
+    changeStyleQuantity.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return true;
+  } else if (valueQuantityInput > 0) {
+    changeStyleQuantity = document.getElementById("texterrorquantity");
+    changeStyleQuantity.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    errorText.innerHTML = "Le nombre doit être supérieur ou égal à 1";
+    return false;
+  } else {
+    changeStyleQuantity = document.getElementById("texterrorquantity");
+    changeStyleQuantity.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    errorText.innerHTML = "Merci d'indiquer votre nombre de games";
+    return false;
+  }
+};
+//
+//6ème CHAMP : BOUTON VILLE
+//
+const validateRadio = (event) => {
+  const location1Input = document.getElementById("location1");
+  const location2Input = document.getElementById("location2");
+  const location3Input = document.getElementById("location3");
+  const location4Input = document.getElementById("location4");
+  const location5Input = document.getElementById("location5");
+  const location6Input = document.getElementById("location6");
+  const checkedLocation1Input = location1Input.checked;
+  const checkedLocation2Input = location2Input.checked;
+  const checkedLocation3Input = location3Input.checked;
+  const checkedLocation4Input = location4Input.checked;
+  const checkedLocation5Input = location5Input.checked;
+  const checkedLocation6Input = location6Input.checked;
+
+  if (
+    checkedLocation1Input == false &&
+    checkedLocation2Input == false &&
+    checkedLocation3Input == false &&
+    checkedLocation4Input == false &&
+    checkedLocation5Input == false &&
+    checkedLocation6Input == false
+  ) {
+    textLocation = document.getElementById("texterrorlocation").textContent;
+    document.getElementById("texterrorlocation").textContent =
+      "Merci de sélectionner une ville";
+    changeStyleIconObligatoire = document.getElementById("texterrorlocation");
+    changeStyleIconObligatoire.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return false;
+  } else {
+    checkedLocation1Input == true ||
+      checkedLocation2Input == true ||
+      checkedLocation3Input == true ||
+      checkedLocation4Input == true ||
+      checkedLocation5Input == true ||
+      checkedLocation6Input == true;
+
+    textLocation = document.getElementById("texterrorlocation").textContent;
+    document.getElementById("texterrorlocation").textContent = "";
+
+    changeStyleIconObligatoire = document.getElementById("texterrorlocation");
+    changeStyleIconObligatoire.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return true;
+  }
+};
+//
+//7ème CHAMP : CHECHBOX
+//
+const validateCheckbox = () => {
+  const conditionsCheckBox1 = document.getElementById("checkbox1");
+  let errorText = document.getElementById("texterrorconditions");
+
+  if (conditionsCheckBox1.checked == false) {
+    errorText.innerHTML =
+      "Merci d'accepter les termes et conditions générales pour s'inscrire";
+    changeStyleIconObligatoire = document.getElementById("texterrorconditions");
+    changeStyleIconObligatoire.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return false;
+  } else {
+    errorText.innerHTML = "";
+    changeStyleIconObligatoire = document.getElementById("texterrorconditions");
+    changeStyleIconObligatoire.setAttribute(
+      "style",
+      "font-size : 16px; color : red; font-weight : bold"
+    );
+    return true;
+  }
+};
+
+//
+// FONCTION DE VALIDATION
+
+const validate = () => {
+  const isFirstNameValid = validateFirst();
+  const isLastNameValid = validateLast();
+  const isEmailValid = validateEmail();
+  const isBirthdateValid = validateBirthdate();
+  const isQuantityValid = validateQuantity();
+  const isRadioValid = validateRadio();
+  const isCheckboxValid = validateCheckbox();
+
+  return (
+    isFirstNameValid &&
+    isLastNameValid &&
+    isEmailValid &&
+    isBirthdateValid &&
+    isQuantityValid &&
+    isRadioValid &&
+    isCheckboxValid
+  );
+};
+
+//
+// FONCTIONS ENVOI DU FORMULAIRE ET MESSAGE DE REMERCIEMENT
+//
+document
+  .getElementById("inscription")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // on le met si erreur afin de ne pas envoyé le formulaire
+
+    if (validate(event)) {
+      const messageValidation = document.getElementById("submitMessage");
+      messageValidation.style.display = "block";
+      const form = document.getElementById("inscription");
+      form.style.display = "none";
+      console.log({
+        prénom: "isFirstNameValid",
+        nom: "isLastNameValid",
+        email: "isEmailValid",
+        birthdate: "isBirthdateValid",
+        quantity: "isQuantityValid",
+        radio: "isRadioValid",
+        checkbox: "isCheckboxValid",
+      });
+    }
+  });
+//
+document
+  .getElementById("inscription")
+  .addEventListener("dblclick", function (event) {
+    event.preventDefault();
+    validate(event);
+  });
+
+//
+// BOUTON FERMETURE APRES INSCRIPTION
+const btnValidation = document.getElementById("btn-validation");
+btnValidation.addEventListener("click", function (event) {
+  modalbg.style.display = "none";
+});
