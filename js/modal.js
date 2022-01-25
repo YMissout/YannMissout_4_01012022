@@ -40,7 +40,7 @@ const validateFirst = (event) => {
     changeStyleFirstName = document.getElementById("texterrorfirstname");
     changeStyleFirstName.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return false;
   } else if (
@@ -51,14 +51,14 @@ const validateFirst = (event) => {
     changeStyleFirstName = document.getElementById("texterrorfirstname");
     changeStyleFirstName.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return true;
   } else {
     changeStyleFirstName = document.getElementById("texterrorfirstname");
     changeStyleFirstName.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     errorText.innerHTML = "Les caractères spéciaux ne sont pas accepté";
     return false;
@@ -80,7 +80,7 @@ const validateLast = (event) => {
     changeStyleLastName = document.getElementById("texterrorlastname");
     changeStyleLastName.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return false;
   } else if (
@@ -91,14 +91,14 @@ const validateLast = (event) => {
     changeStyleLastName = document.getElementById("texterrorlastname");
     changeStyleLastName.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return true;
   } else {
     changeStyleFirstName = document.getElementById("texterrorfirstname");
     changeStyleFirstName.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     errorText.innerHTML = "Les caractères spéciaux ne sont pas accepté";
     return false;
@@ -122,7 +122,7 @@ const validateEmail = (event) => {
     changeStyleEmail = document.getElementById("texterroremail");
     changeStyleEmail.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return false;
   } else if (!emailFormat.test(valueNameInputEmail)) {
@@ -131,7 +131,7 @@ const validateEmail = (event) => {
     changeStyleEmail = document.getElementById("texterroremail");
     changeStyleEmail.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return false;
   } else {
@@ -153,7 +153,7 @@ const validateBirthdate = (event) => {
     changeStyleBirthdate = document.getElementById("texterrorbirthdate");
     changeStyleBirthdate.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return false;
   } else {
@@ -178,14 +178,14 @@ const validateQuantity = (event) => {
     changeStyleQuantity = document.getElementById("texterrorquantity");
     changeStyleQuantity.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return true;
   } else if (valueQuantityInput > 0) {
     changeStyleQuantity = document.getElementById("texterrorquantity");
     changeStyleQuantity.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     errorText.innerHTML = "Le nombre doit être supérieur ou égal à 1";
     return false;
@@ -193,7 +193,7 @@ const validateQuantity = (event) => {
     changeStyleQuantity = document.getElementById("texterrorquantity");
     changeStyleQuantity.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     errorText.innerHTML = "Merci d'indiquer votre nombre de games";
     return false;
@@ -230,7 +230,7 @@ const validateRadio = (event) => {
     changeStyleIconObligatoire = document.getElementById("texterrorlocation");
     changeStyleIconObligatoire.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return false;
   } else {
@@ -247,7 +247,7 @@ const validateRadio = (event) => {
     changeStyleIconObligatoire = document.getElementById("texterrorlocation");
     changeStyleIconObligatoire.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return true;
   }
@@ -265,7 +265,7 @@ const validateCheckbox = () => {
     changeStyleIconObligatoire = document.getElementById("texterrorconditions");
     changeStyleIconObligatoire.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return false;
   } else {
@@ -273,7 +273,7 @@ const validateCheckbox = () => {
     changeStyleIconObligatoire = document.getElementById("texterrorconditions");
     changeStyleIconObligatoire.setAttribute(
       "style",
-      "font-size : 16px; color : red; font-weight : bold"
+      "font-size : 14px; color : red; font-weight : bold"
     );
     return true;
   }
