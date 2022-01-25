@@ -181,7 +181,7 @@ const validateQuantity = (event) => {
       "font-size : 14px; color : red; font-weight : bold"
     );
     return true;
-  } else if (valueQuantityInput > 0) {
+  } else if (valueQuantityInput > 1) {
     changeStyleQuantity = document.getElementById("texterrorquantity");
     changeStyleQuantity.setAttribute(
       "style",
