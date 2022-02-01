@@ -487,6 +487,13 @@ footer {
   padding: 60px 1vw;
 }
 
+.color-error {
+  padding-top: 5px;
+  font-size: 14px;
+  color: red;
+  font-weight: 400;
+}
+
 /* Responsive media queries */
 @media screen and (max-width: 1492px) {
   .copyrights {

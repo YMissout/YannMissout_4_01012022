@@ -43,14 +43,10 @@ const errorText = document.getElementById("texterrorfirstname");
 //
 const validateFirst = (event) => {
   const valueNameInput = nameInput.value; //value field
-
   if (nameRegex.test(valueNameInput) && valueNameInput.length >= 2) {
     return true;
   } else {
-    errorText.setAttribute(
-      "style",
-      "font-size : 14px; color : red; font-weight : bold"
-    );
+    errorText.classList.add("color-error");
     errorText.innerHTML = errorTexts[0];
     return false;
   }
