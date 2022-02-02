@@ -1,3 +1,5 @@
+// verfier la croix apres validation
+
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -28,8 +30,11 @@ btnClose.addEventListener("click", function (event) {
 // VARIABLES :
 
 // Regex name
-const nameRegex = /^[A-ZÇÉÈÊËÀÂÎÏÔÙÛa-zçéèêëàâîïôùû_\-\.\ ]+$/; //nom
+const nameRegex = /^[a-zA-Z]+$/; //nom
+const mailRegex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/; //mail
+
 const errorTexts = [
+  "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
   "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
   "Merci de renseigner une adresse email valide",
   "Vous devez entrer votre date de naissance.",
@@ -39,26 +44,60 @@ const errorTexts = [
 
 // 1er CHAMP : LE PRENOM
 const nameInput = document.getElementById("first"); // name field
-const errorText = document.getElementById("texterrorfirstname");
+const lastNameInput = document.getElementById("last"); // name field
+const emailInput = document.getElementById("email"); // name field
+const birthdateInput = document.getElementById("birthdate"); // name field
+const quantityInput = document.getElementById("quantity"); // name field
+// const nameInput = document.getElementById("location1"); // name field
+// const nameInput = document.getElementById("location1"); // name field
+
+const errorText = [
+  "texterrorfirstname",
+  "texterrorlastname",
+  "texterroremail",
+  "texterrorbirthdate",
+  "texterrorquantity",
+  "texterrorlocation",
+  "texterrorconditions",
+];
+
 //
-const validateFirst = (event) => {
-  const valueNameInput = nameInput.value; //value field
-  if (nameRegex.test(valueNameInput) && valueNameInput.length >= 2) {
+const validateForm = (event) => {
+  let valueFirstNameInput = nameInput.value; //value field
+  let valueLastNameInput = lastNameInput.value; //value field
+  if (
+    nameRegex.test(valueFirstNameInput) &&
+    valueFirstNameInput.length >= 2 &&
+    nameRegex.test(valueLastNameInput) &&
+    valueLastNameInput.length >= 2
+  ) {
     return true;
   } else {
-    errorText.classList.add("color-error");
-    errorText.innerHTML = errorTexts[0];
+    // errorText.classList.add("color-error");
+    document.getElementById(errorText[0]).innerHTML = errorTexts[0];
+    document.getElementById(errorText[1]).innerHTML = errorTexts[1];
     return false;
   }
 };
+
+// const validateLast = (event) => {
+//   let valueLastNameInput = nameInput.value; //value field
+//   if (nameRegex.test(valueLastNameInput) && valueLastNameInput.length >= 2) {
+//     return true;
+//   } else {
+//     // errorText.classList.add("color-error");
+//     document.getElementById(errorText[1]).innerHTML = errorTexts[1];
+//     return false;
+//   }
+// };
 
 //
 // FONCTION DE VALIDATION
 
 const validate = () => {
-  const isFirstNameValid = validateFirst();
+  const validateForms = validateForm();
 
-  return isFirstNameValid;
+  return validateForms;
 };
 
 //

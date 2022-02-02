@@ -487,7 +487,13 @@ footer {
   padding: 60px 1vw;
 }
 
-.color-error {
+#texterrorfirstname,
+#texterrorlastname,
+#texterroremail,
+#texterrorbirthdate,
+#texterrorquantity,
+#texterrorlocation,
+#texterrorconditions {
   padding-top: 5px;
   font-size: 14px;
   color: red;
