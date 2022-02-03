@@ -116,13 +116,24 @@ const validateLast = (event) => {
 
 //
 // FONCTION DE VALIDATION
-
 const validate = () => {
-  const validateForms = (validateFirst(), validateLast());
+  const isFirstNameValid = validateFirst();
+  const isLastNameValid = validateLast();
+  // const isEmailValid = validateEmail();
+  // const isBirthdateValid = validateBirthdate();
+  // const isQuantityValid = validateQuantity();
+  // const isRadioValid = validateRadio();
+  // const isCheckboxValid = validateCheckbox();
 
-  return validateForms;
+  return (
+    isFirstNameValid && isLastNameValid
+    //   isEmailValid &&
+    //   isBirthdateValid &&
+    //   isQuantityValid &&
+    //   isRadioValid &&
+    //   isCheckboxValid
+  );
 };
-
 //
 // FONCTIONS ENVOI DU FORMULAIRE ET MESSAGE DE REMERCIEMENT
 //
