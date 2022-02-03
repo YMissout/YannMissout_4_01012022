@@ -62,19 +62,42 @@ const errorText = [
 ];
 
 //
-const validateForm = (event) => {
+// const validateForm = (event) => {
+//   let valueFirstNameInput = nameInput.value; //value field
+//   let valueLastNameInput = lastNameInput.value; //value field
+//   if (nameRegex.test(valueFirstNameInput) && valueFirstNameInput.length >= 2) {
+//     return true;
+//   } else if (
+//     nameRegex.test(valueLastNameInput) &&
+//     valueLastNameInput.length >= 2
+//   ) {
+//     return true;
+//   } else {
+//     // errorText.classList.add("color-error");
+//     document.getElementById(errorText[0]).innerHTML = errorTexts[0];
+//     document.getElementById(errorText[1]).innerHTML = errorTexts[1];
+//     return false;
+//   }
+// };
+
+const validateFirst = (event) => {
   let valueFirstNameInput = nameInput.value; //value field
-  let valueLastNameInput = lastNameInput.value; //value field
-  if (
-    nameRegex.test(valueFirstNameInput) &&
-    valueFirstNameInput.length >= 2 &&
-    nameRegex.test(valueLastNameInput) &&
-    valueLastNameInput.length >= 2
-  ) {
+  if (nameRegex.test(valueFirstNameInput) && valueFirstNameInput.length >= 2) {
+    document.getElementById(errorText[0]).innerHTML = "";
     return true;
   } else {
     // errorText.classList.add("color-error");
     document.getElementById(errorText[0]).innerHTML = errorTexts[0];
+    return false;
+  }
+};
+const validateLast = (event) => {
+  let valueLastNameInput = lastNameInput.value; //value field
+  if (nameRegex.test(valueLastNameInput) && valueLastNameInput.length >= 2) {
+    document.getElementById(errorText[1]).innerHTML = "";
+    return true;
+  } else {
+    // errorText.classList.add("color-error");
     document.getElementById(errorText[1]).innerHTML = errorTexts[1];
     return false;
   }
@@ -95,7 +118,7 @@ const validateForm = (event) => {
 // FONCTION DE VALIDATION
 
 const validate = () => {
-  const validateForms = validateForm();
+  const validateForms = (validateFirst(), validateLast());
 
   return validateForms;
 };
