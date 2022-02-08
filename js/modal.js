@@ -27,12 +27,7 @@ btnClose.addEventListener("click", function (event) {
   modalbg.style.display = "none";
 });
 
-// Regex
-const nameRegex = /^[a-zA-Z][a-zA-Z]/; //nom
-const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //mail
-const quantityRegex = /^[0-9]+/;
-
-// Variables input du form
+// Inputs Value
 const nameInput = document.getElementById("first");
 const lastNameInput = document.getElementById("last");
 const emailInput = document.getElementById("email");
@@ -45,6 +40,11 @@ const location4Input = document.getElementById("location4");
 const location5Input = document.getElementById("location5");
 const location6Input = document.getElementById("location6");
 const conditionsCheckBox1 = document.getElementById("checkbox1");
+
+// Regex
+const nameRegex = /^[a-zA-Z][a-zA-Z]/; //nom
+const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //mail
+const quantityRegex = /^[0-9]+/;
 
 const errorText = [
   "texterrorfirstname",
