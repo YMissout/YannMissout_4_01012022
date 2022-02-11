@@ -42,8 +42,8 @@ const location6Input = document.getElementById("location6");
 const conditionsCheckBox1 = document.getElementById("checkbox1");
 
 // Regex
-const nameRegex = /^[a-zA-Z][a-zA-Z]/; //nom
-const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; //mail
+const nameRegex = /^[a-z ,.'-][a-z ,.'-]+$/i;
+const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const quantityRegex = /^[0-9]+/;
 
 const errorText = [
@@ -134,12 +134,6 @@ const validateRadio = (event) => {
     document.getElementById(errorText[5]).innerHTML = errorTexts[5];
     return false;
   } else {
-    // checkedLocation1Input == true ||
-    //   checkedLocation2Input == true ||
-    //   checkedLocation3Input == true ||
-    //   checkedLocation4Input == true ||
-    //   checkedLocation5Input == true ||
-    //   checkedLocation6Input == true;
     document.getElementById(errorText[5]).innerHTML = "";
     return true;
   }
