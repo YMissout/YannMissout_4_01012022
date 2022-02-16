@@ -43,8 +43,10 @@ const conditionsCheckBox1 = document.getElementById("checkbox1");
 
 // Regex
 const nameRegex = /^[a-z ,.'-][a-z ,.'-]+$/i;
-const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const quantityRegex = /^[0-9]+/;
+const birthdateRegex =
+  /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;
 
 const errorText = [
   "texterrorfirstname",
@@ -66,56 +68,26 @@ const errorTexts = [
   "Vous devez vérifier que vous acceptez les termes et conditions",
 ];
 
-const validateFirst = (event) => {
-  let valueFirstNameInput = nameInput.value; //value field
-  if (nameRegex.test(valueFirstNameInput)) {
-    document.getElementById(errorText[0]).innerHTML = "";
+const validInput = (input, regex, errorTextId, errorText) => {
+  let inputValue = input.value;
+  if (regex.test(inputValue)) {
+    document.getElementById(errorTextId).innerText = "";
     return true;
   } else {
-    document.getElementById(errorText[0]).innerHTML = errorTexts[0];
+    document.getElementById(errorTextId).innerHTML = errorText;
     return false;
   }
 };
-const validateLast = (event) => {
-  let valueLastNameInput = lastNameInput.value; //value field
-  if (nameRegex.test(valueLastNameInput)) {
-    document.getElementById(errorText[1]).innerHTML = "";
-    return true;
-  } else {
-    document.getElementById(errorText[1]).innerHTML = errorTexts[1];
-    return false;
-  }
-};
-const validateEmail = (event) => {
-  let valueEmailInput = emailInput.value; //value field
-  if (mailRegex.test(valueEmailInput)) {
-    document.getElementById(errorText[2]).innerHTML = "";
-    return true;
-  } else {
-    document.getElementById(errorText[2]).innerHTML = errorTexts[2];
-    return false;
-  }
-};
-const validateBirthdate = (event) => {
-  let valueBirthdateInput = birthdateInput.value; //value field
-  if (valueBirthdateInput === "") {
-    document.getElementById(errorText[3]).innerHTML = errorTexts[3];
-    return false;
-  } else {
-    document.getElementById(errorText[3]).innerHTML = "";
-    return true;
-  }
-};
-const validateQuantity = (event) => {
-  let valueQuantityInput = quantityInput.value; //value field
-  if (quantityRegex.test(valueQuantityInput)) {
-    document.getElementById(errorText[4]).innerHTML = "";
-    return true;
-  } else {
-    document.getElementById(errorText[4]).innerHTML = errorTexts[4];
-    return false;
-  }
-};
+// const validateRadio = (event) => {
+//   let checkedLocation = locationInput.checked;
+//   if (checkedLocation) {
+//     document.getElementById(errorText[5]).innerHTML = "";
+//     return true;
+//   } else {
+//     document.getElementById(errorText[5]).innerHTML = errorTexts[5];
+//     return false;
+//   }
+// };
 const validateRadio = (event) => {
   let checkedLocation1Input = location1Input.checked;
   let checkedLocation2Input = location2Input.checked;
@@ -152,11 +124,36 @@ const validateCheckbox = (event) => {
 //
 // FONCTION DE VALIDATION
 const validate = () => {
-  const isFirstNameValid = validateFirst();
-  const isLastNameValid = validateLast();
-  const isEmailValid = validateEmail();
-  const isBirthdateValid = validateBirthdate();
-  const isQuantityValid = validateQuantity();
+  const isFirstNameValid = validInput(
+    nameInput,
+    nameRegex,
+    errorText[0],
+    errorTexts[0]
+  );
+  const isLastNameValid = validInput(
+    lastNameInput,
+    nameRegex,
+    errorText[1],
+    errorTexts[1]
+  );
+  const isEmailValid = validInput(
+    emailInput,
+    emailRegex,
+    errorText[2],
+    errorTexts[2]
+  );
+  const isBirthdateValid = validInput(
+    birthdateInput,
+    quantityRegex,
+    errorText[3],
+    errorTexts[3]
+  );
+  const isQuantityValid = validInput(
+    quantityInput,
+    quantityRegex,
+    errorText[4],
+    errorTexts[4]
+  );
   const isRadioValid = validateRadio();
   const isCheckboxValid = validateCheckbox();
 
@@ -188,12 +185,10 @@ document
   });
 
 //
-document
-  .getElementById("inscription")
-  .addEventListener("dblclick", function (event) {
-    event.preventDefault();
-    validate(event);
-  });
+document.getElementById("inscription").addEventListener(function (event) {
+  event.preventDefault();
+  validate(event);
+});
 
 //
 // // BOUTON FERMETURE APRES INSCRIPTION
