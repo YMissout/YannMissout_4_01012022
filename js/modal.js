@@ -46,18 +46,11 @@ const location6Input = document.getElementById("location6");
 const conditionsCheckBox1 = document.getElementById("checkbox1");
 
 // // Regex
-// const nameRegex = /^[a-z ,.'-][a-z ,.'-]+$/i;
-// const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-// const quantityRegex = /^[0-9]+/;
-// const birthdateRegex =
-//   /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;
-// Regex
-const allRegex = [
-  /^[a-z ,.'-][a-z ,.'-]+$/i,
-  /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-  /^[0-9]+/,
-  /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/,
-];
+const nameRegex = /^[a-z ,.'-][a-z ,.'-]+$/i;
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const quantityRegex = /^[0-9]+/;
+const birthdateRegex =
+  /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;
 
 // div where to insert error text
 const errorText = [
@@ -133,35 +126,35 @@ const validateCheckbox = (event) => {
 const validate = () => {
   const isFirstNameValid = validInput(
     nameInput,
-    allRegex[0],
+    nameRegex,
     errorText[0],
     errorTexts[0]
   );
   // Last name
   const isLastNameValid = validInput(
     lastNameInput,
-    allRegex[1],
+    nameRegex,
     errorText[1],
     errorTexts[1]
   );
   // Email
   const isEmailValid = validInput(
     emailInput,
-    allRegex[2],
+    emailRegex,
     errorText[2],
     errorTexts[2]
   );
   // Birthdate
   const isBirthdateValid = validInput(
     birthdateInput,
-    allRegex[3],
+    quantityRegex,
     errorText[3],
     errorTexts[3]
   );
   // Quantity (tournament)
   const isQuantityValid = validInput(
     quantityInput,
-    allRegex[4],
+    quantityRegex,
     errorText[4],
     errorTexts[4]
   );
